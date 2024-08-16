@@ -12,7 +12,7 @@ const Products = () => {
   }, [])
   return (
     <div>
-      <h1>All products</h1>
+      <h1 className='text-center my-5 font-bold text-3xl'>All Products</h1>
     </div>
   );
 };
