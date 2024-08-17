@@ -3,16 +3,9 @@ import ProductCard from "./components/ProductCard";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState("");
 
   console.log(products.title);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const searchText = e.target.search.value;
-    console.log(searchText);
-    setSearch(searchText);
-  };
 
   useEffect(() => {
     fetch("https://proucts-hunt-server.vercel.app/products")
@@ -28,7 +21,7 @@ const Products = () => {
       <h1 className="text-center my-5 font-bold text-3xl">All Products</h1>
 
       <div className="w-11/12 mb-8 mx-auto flex flex-col md:flex-row gap-12">
-        <form onSubmit={handleSearch} className="flex gap-2">
+        <form className="flex gap-2">
           <input
             type="text"
             name="search"
@@ -60,7 +53,7 @@ const Products = () => {
       {/* Maaping through products */}
       <div className="w-11/12 mx-auto grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
-          <ProductCard key={product._id} product={product} handleSearch={handleSearch}></ProductCard>
+          <ProductCard key={product._id} product={product}></ProductCard>
         ))}
       </div>
     </div>
