@@ -32,9 +32,7 @@ const Navbar = () => {
             <li>
             <Link to='/products'>Products</Link>
             </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl">Products Hunt</Link>
@@ -47,9 +45,7 @@ const Navbar = () => {
           <li>
             <Link to='/products'>Products</Link>
           </li>
-          <li>
-            <a>Item 3</a>
-          </li>
+          
         </ul>
       </div>
       <div className="navbar-end gap-5">
