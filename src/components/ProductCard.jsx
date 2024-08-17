@@ -1,28 +1,31 @@
-import React from 'react';
+import React from "react";
 
-const ProductCard = ({product}) => {
+const ProductCard = ({ product }) => {
+  
+
+  
+  console.log(product.title);
   return (
     <div>
       <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-  <img
-    alt=""
-    src={product.image}
-    className="h-56 w-full object-cover"
-  />
+        <img alt="" src={product.image} className="h-56 w-full object-cover" />
 
-  <div className="bg-white p-4 sm:p-6">
-    <time datetime="2022-10-10" className="block text-xs text-gray-500"> {product.category} </time>
+        <div className="bg-white p-4 sm:p-6">
+          <time datetime="2022-10-10" className="block text-xs text-gray-500">
+            {" "}
+            {product.category}{" "}
+          </time>
 
-    <a href="#">
-      <h3 className="mt-0.5 text-lg text-gray-900">{product.title}</h3>
-    </a>
+          <a href="#">
+            <h3 className="mt-0.5 text-lg text-gray-900">{product.title}</h3>
+          </a>
 
-    <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
-      {product.description}
-    </p>
-    <p className='mt-1'>Price: ${product.price}</p>
-  </div>
-</article>
+          <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+            {product.description}
+          </p>
+          <p className="mt-1">Price: ${product.price}</p>
+        </div>
+      </article>
     </div>
   );
 };
