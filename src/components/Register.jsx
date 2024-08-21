@@ -1,4 +1,27 @@
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProviders";
+
 const Register = () => {
+  const {createUser} = useContext(AuthContext);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(name, email, password);
+
+    createUser(email, password)
+    .then(result => {
+      console.log(result.user);
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
+
   return (
     <section className="bg-white">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -35,7 +58,7 @@ const Register = () => {
               Your proud product provider. Dedicated for your service to move on and make sure you achieve the best quality.
             </p>
 
-            <form  className="mt-8 grid grid-cols-6 gap-6">
+            <form onSubmit={handleRegister} className="mt-8 grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="FirstName"
@@ -48,7 +71,7 @@ const Register = () => {
                   type="text"
                   id="name"
                   name="first_name"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 w-full rounded-lg border-2 border-black text-sm text-gray-700 shadow-sm"
                 />
               </div>
 
@@ -65,7 +88,7 @@ const Register = () => {
                   type="email"
                   id="Email"
                   name="email"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 w-full rounded-lg border-2 border-black text-sm text-gray-700 shadow-sm"
                 />
               </div>
 
@@ -82,7 +105,7 @@ const Register = () => {
                   type="password"
                   id="Password"
                   name="password"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 w-full rounded-lg border-2 border-black text-sm text-gray-700 shadow-sm"
                 />
               </div>
 
@@ -91,13 +114,9 @@ const Register = () => {
                   By creating an account, you agree to our
                   <a href="#" className="text-gray-700 underline">
                     {" "}
-                    terms and conditions{" "}
+                    privacy policy.
+                    Terms and conditions 
                   </a>
-                  and
-                  <a href="#" className="text-gray-700 underline">
-                    privacy policy
-                  </a>
-                  .
                 </p>
               </div>
 

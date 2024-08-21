@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProviders";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+    .then(() => console.log("logout successful!"))
+    .catch(error => console.error (error))
+  }
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -27,34 +35,46 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-            <Link to='/'>Home</Link>
-          </li>
-            <li>
-            <Link to='/products'>Products</Link>
+              <Link to="/">Home</Link>
             </li>
-            
+            <li>
+              <Link to="/products">Products</Link>
+            </li>
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">Products Hunt</Link>
+        <Link to="/" className="btn btn-ghost text-xl">
+          Products Hunt
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to='/'>Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to='/products'>Products</Link>
+            <Link to="/products">Products</Link>
           </li>
-          
         </ul>
       </div>
       <div className="navbar-end gap-5">
-      <Link to={"/register"}>
-        <button className="btn btn-success text-white">Register</button>
-      </Link>
-        <Link to={"/login"}>
-        <button className="btn btn-warning text-white">Login</button>
-        </Link>
+        {
+        user ? (
+          <div className="flex items-center">
+            {" "}
+            <div className="mr-5">{user.email}</div>{" "}
+            <button onClick={handleLogout} className="btn btn-error text-white">Logout</button>
+          </div> 
+        ) : 
+        <div>
+          <Link to={"/register"}>
+            <button className="btn btn-success text-white mr-5">Register</button>
+          </Link>
+          <Link to={"/login"}>
+            <button className="btn btn-warning text-white">Login</button>
+          </Link>
+        </div>
+      } 
+        
       </div>
     </div>
   );

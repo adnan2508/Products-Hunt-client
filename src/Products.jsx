@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
 
-  console.log(products.title);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value;
+    setSearch(searchText);
+    console.log(searchText);
+  }
 
+  useEffect(()=> {
+    fetch(`http://localhost:5000/products`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setProducts(data);
+      });
 
-  useEffect(() => {
-    fetch("https://proucts-hunt-server.vercel.app/products")
+    fetch(`http://localhost:5000/products?search=${search}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -21,7 +33,7 @@ const Products = () => {
       <h1 className="text-center my-5 font-bold text-3xl">All Products</h1>
 
       <div className="w-11/12 mb-8 mx-auto flex flex-col md:flex-row gap-12">
-        <form className="flex gap-2">
+        <form onSubmit={handleSearch} className="flex gap-2">
           <input
             type="text"
             name="search"
@@ -29,7 +41,7 @@ const Products = () => {
             placeholder="Search here..."
             className="input input-bordered w-full max-w-xs "
           />
-          <input type="submit" value="search" className="btn btn-accent" />
+          <input type="submit" value="Search" className="btn btn-accent"/>
         </form>
 
         <div className="">
@@ -50,7 +62,7 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Maaping through products */}
+      {/* Mapping through products */}
       <div className="w-11/12 mx-auto grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
           <ProductCard key={product._id} product={product}></ProductCard>
