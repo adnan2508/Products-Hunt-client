@@ -11,7 +11,7 @@ const Home = () => {
             <h1 className="text-5xl font-bold">Products Hunt!</h1>
             <p className="py-6">
             Your proud product provider. Dedicated for your service to move on and make sure you achieve the best quality.
-            </p>a
+            </p>
             <button className="btn btn-primary">Get Started</button>
           </div>
         </div>
